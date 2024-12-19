@@ -2,9 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const Product = require('./models/Product'); // Import your Product model
+const Product = require('../models/Product'); // Import your Product model
 require('dotenv').config();
-
+console.log(process.env.MONGO_URI); 
 const app = express();
 
 // Use middlewares
