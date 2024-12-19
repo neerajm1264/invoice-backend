@@ -8,8 +8,9 @@ require('dotenv').config();
 const app = express();
 
 // Use middlewares
-app.use(cors());
-app.use(bodyParser.json());  // Parse JSON requests
+app.use(cors({
+    origin: '*' // Replace '*' with your frontend URL for more security, e.g., 'https://invoice-mdby.vercel.app'
+  }));app.use(bodyParser.json());  // Parse JSON requests
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
