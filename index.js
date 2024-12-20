@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Product creation route
 app.post('/api/products', async (req, res) => {
-  try {
+  try { 
     const { name, price, image, category, varieties } = req.body;
     const newProduct = new Product({ name, price, image, category, varieties });
 
