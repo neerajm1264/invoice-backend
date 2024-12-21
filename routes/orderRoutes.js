@@ -25,4 +25,9 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Test route for orders
+router.get('/test', (req, res) => {
+    res.status(200).send('Orders test route working');
+  });  
+  
 module.exports = router;

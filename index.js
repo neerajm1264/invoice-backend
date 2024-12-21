@@ -7,6 +7,7 @@ require('dotenv').config();
 // Import Routes
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
 
 // Initialize the app
 const app = express();
@@ -23,6 +24,7 @@ mongoose.connect(process.env.MONGO_URI)
 // Use the routes
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/categories', categoryRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;
