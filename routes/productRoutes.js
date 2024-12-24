@@ -5,8 +5,8 @@ const Product = require('../models/Product');
 // Create a new product
 router.post('/', async (req, res) => {
   try {
-    const { name, price, image, category, varieties } = req.body;
-    const newProduct = new Product({ name, price, image, category, varieties });
+    const { name, price, image, category, varieties, id } = req.body;
+    const newProduct = new Product({ name, price, image, category, varieties, id });
 
     await newProduct.save();
     res.status(201).json(newProduct);
