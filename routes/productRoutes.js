@@ -1,17 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
+const { v4: uuidv4 } = require('uuid');
 
 // Create a new product
 router.post('/', async (req, res) => {
   try {
-    const { name, price, image, category, varieties, id } = req.body;
+    const { name, price, image, category, varieties } = req.body;
+    const id = uuidv4();  // Generate a unique ID
     const newProduct = new Product({ name, price, image, category, varieties, id });
 
     await newProduct.save();
     res.status(201).json(newProduct);
   } catch (error) {
-    res.status(500).json({ message: 'Failed to create product', error });
+    console.error("Error creating product:", error);
+    res.status(500).json({ message: 'Failed to create product', error: error.message });
   }
 });
 
