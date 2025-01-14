@@ -29,6 +29,8 @@ router.get('/', async (req, res) => {
 router.get('/test', (req, res) => {
     res.status(200).send('Orders test route working');
   });  
+  
+module.exports = router;
 
   // Delete an order
   router.delete('/:id', async (req, res) => {
@@ -45,5 +47,3 @@ router.get('/test', (req, res) => {
       res.status(500).json({ message: 'Failed to delete order', error });
     }
   });
-  
-module.exports = router;
