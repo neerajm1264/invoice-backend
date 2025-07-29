@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../models/order');
+const fetch = require('node-fetch');
 
 // Create a new order
 router.post('/', async (req, res) => {
@@ -9,6 +10,27 @@ router.post('/', async (req, res) => {
     const newOrder = new Order({ id, products, totalAmount, timestamp, name, phone, address, discount, delivery  });
 
     await newOrder.save();
+
+        // Fetch all device tokens
+    const tokensRes = await fetch('http://localhost:5000/api/notifications/tokens');
+    const tokens = await tokensRes.json();
+
+    for (let token of tokens) {
+      await fetch('https://exp.host/--/api/v2/push/send', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Accept-encoding': 'gzip, deflate',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: token,
+          title: 'New Order Received',
+          body: `Order #${id} • ₹${totalAmount}`,
+        }),
+      });
+    }
+    
     res.status(201).json(newOrder);
   } catch (error) {
     res.status(500).json({ message: 'Failed to create order', error });
