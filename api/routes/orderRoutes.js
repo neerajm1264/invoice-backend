@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../models/order');
-const fetch = require('node-fetch');
 
 // Create a new order
 router.post('/', async (req, res) => {
@@ -10,7 +9,6 @@ router.post('/', async (req, res) => {
     const newOrder = new Order({ id, products, totalAmount, timestamp, name, phone, address, discount, delivery  });
 
     await newOrder.save();
-    
     res.status(201).json(newOrder);
   } catch (error) {
     res.status(500).json({ message: 'Failed to create order', error });
