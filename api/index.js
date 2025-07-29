@@ -15,7 +15,9 @@ const notificationRoutes = require('./routes/notificationRoutes');
 const app = express();
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  origin: '*', // or use '*' for all origins (less secure)
+}));
 app.use(bodyParser.json());
 
 // MongoDB connection
